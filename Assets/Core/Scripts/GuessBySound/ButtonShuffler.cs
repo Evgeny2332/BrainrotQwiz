@@ -8,12 +8,13 @@ public class ButtonShuffler : MonoBehaviour
     #endregion
 
     #region MonoBehaviour
-    private void Update()
+    private void OnEnable()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Shuffle();
-        }
+        
+    }
+    private void OnDisable()
+    {
+        
     }
     #endregion
 
