@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -22,11 +21,11 @@ public class SoundBlock : MonoBehaviour
     #region MonoBehabiour
     private void OnEnable()
     {
-        _checker.OnButtonPressed += StopSound;
+
     }
     private void OnDisable()
     {
-        _checker.OnButtonPressed -= StopSound;
+        
     }
     #endregion
 

@@ -4,17 +4,8 @@ using UnityEngine;
 public class AnswerChecker : MonoBehaviour
 {
     #region Fields
-    public event Action OnButtonPressed;
+    public event Action<bool> OnButtonPressed;
     #endregion
 
-    public void AnswerCorrectly()
-    {
-        Debug.Log("Верно");
-        OnButtonPressed?.Invoke();
-    }
-    public void AnswerIncorrectly()
-    {
-        Debug.Log("Неверно");
-        OnButtonPressed?.Invoke();
-    }
+    public void GiveAnswer(bool isRight) => OnButtonPressed?.Invoke(isRight);
 }
