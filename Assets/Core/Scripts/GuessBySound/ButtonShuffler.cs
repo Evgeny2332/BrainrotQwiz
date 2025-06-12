@@ -4,17 +4,19 @@ using UnityEngine;
 public class ButtonShuffler : MonoBehaviour
 {
     #region Fields
+    [SerializeField] private GuessBySoundController _guessBySoundController;
+
     [SerializeField] private List<Transform> _buttonsTransform;
     #endregion
 
     #region MonoBehaviour
     private void OnEnable()
     {
-        
+        _guessBySoundController.OnGiveAnswer += Shuffle;
     }
     private void OnDisable()
     {
-        
+        _guessBySoundController.OnGiveAnswer -= Shuffle;
     }
     #endregion
 

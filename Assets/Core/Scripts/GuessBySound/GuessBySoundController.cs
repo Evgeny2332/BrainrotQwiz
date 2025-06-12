@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GuessBySoundController : MonoBehaviour
@@ -5,6 +6,9 @@ public class GuessBySoundController : MonoBehaviour
     #region Field
     [SerializeField] private Timer _timer;
     [SerializeField] private AnswerChecker _answerChecker;
+    [SerializeField] private SoundBlock _soundBlock;
+
+    public event Action OnGiveAnswer;
     #endregion
 
     #region MonoBehaviour
@@ -21,7 +25,9 @@ public class GuessBySoundController : MonoBehaviour
 
     private void Start()
     {
-        _timer.Init(5);
+        _soundBlock.PlaySound();
+
+        _timer.Init(30);
     }
     #endregion
 
@@ -32,13 +38,12 @@ public class GuessBySoundController : MonoBehaviour
 
     private void GiveAnswer(bool isRight)
     {
-        if (isRight)
-        {
-            Debug.Log("Ответ верный");
-        }
-        else
-        {
-            Debug.Log("Ответ неверный");
-        }
+
+        OnGiveAnswer?.Invoke();
+    }
+
+    private void EndGame()
+    {
+        Debug.Log("Карточки закончились");
     }
 }

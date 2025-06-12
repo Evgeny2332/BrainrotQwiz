@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 350731798}
   - component: {fileID: 350731797}
   m_Layer: 5
-  m_Name: TaskNumber
+  m_Name: TaskCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1268,6 +1268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a23aea8e24a3b94cbc8069cd2d7e4a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _guessBySoundController: {fileID: 977916952}
   _buttonsTransform:
   - {fileID: 75762525}
   - {fileID: 1590470835}
@@ -1319,6 +1320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timer: {fileID: 2141468573}
   _answerChecker: {fileID: 1078442391}
+  _soundBlock: {fileID: 1893661849}
 --- !u!4 &977916953
 Transform:
   m_ObjectHideFlags: 0
@@ -2199,6 +2201,7 @@ GameObject:
   - component: {fileID: 1893661847}
   - component: {fileID: 1893661848}
   - component: {fileID: 1893661849}
+  - component: {fileID: 1893661850}
   m_Layer: 5
   m_Name: SoundBlock
   m_TagString: Untagged
@@ -2335,10 +2338,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68ec3f041d5d944399352de87969177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _checker: {fileID: 1078442391}
-  _sound: {fileID: 1775834598}
-  _replay: {fileID: 98074447}
   _soundDuration: 5
+--- !u!114 &1893661850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893661846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41055f143a78ca54683d1d1fb3645bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundBlock: {fileID: 1893661849}
+  _soundWindow: {fileID: 1775834598}
+  _replayWindow: {fileID: 98074447}
 --- !u!1 &2141468569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2374,7 +2389,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00019074, y: 345}
+  m_AnchoredPosition: {x: 0.00019074, y: 357.96}
   m_SizeDelta: {x: 539.96, y: 120.8956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2141468571
