@@ -9,18 +9,7 @@ public class ButtonShuffler : MonoBehaviour
     [SerializeField] private List<Transform> _buttonsTransform;
     #endregion
 
-    #region MonoBehaviour
-    private void OnEnable()
-    {
-        _guessBySoundController.OnGiveAnswer += Shuffle;
-    }
-    private void OnDisable()
-    {
-        _guessBySoundController.OnGiveAnswer -= Shuffle;
-    }
-    #endregion
-
-    private void Shuffle()
+    public void Shuffle()
     {
         List<Vector3> positions = new List<Vector3>();
 

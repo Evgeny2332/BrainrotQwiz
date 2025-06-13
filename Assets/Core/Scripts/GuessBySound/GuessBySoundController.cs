@@ -3,47 +3,47 @@ using UnityEngine;
 
 public class GuessBySoundController : MonoBehaviour
 {
-    #region Field
-    [SerializeField] private Timer _timer;
-    [SerializeField] private AnswerChecker _answerChecker;
+    #region Fields
     [SerializeField] private SoundBlock _soundBlock;
-
-    public event Action OnGiveAnswer;
+    [SerializeField] private Timer _timer;
+    [SerializeField] private AnswerChecker _checker;
+    [SerializeField] private AnswerCounter _counter;
+    [SerializeField] private ButtonShuffler _shuffler;
     #endregion
 
     #region MonoBehaviour
     private void OnEnable()
     {
         _timer.OnTimeUp += TimeUp;
-        _answerChecker.OnButtonPressed += GiveAnswer;
+        _checker.OnButtonPressed += GetAnswer;
+        _counter.OnTaskOver += FinishGame;
     }
     private void OnDisable()
     {
         _timer.OnTimeUp -= TimeUp;
-        _answerChecker.OnButtonPressed -= GiveAnswer;
+        _checker.OnButtonPressed -= GetAnswer;
+        _counter.OnTaskOver -= FinishGame;
     }
 
     private void Start()
     {
-        _soundBlock.PlaySound();
-
-        _timer.Init(30);
+        _timer.StartTimer();
     }
     #endregion
 
     private void TimeUp()
     {
-        Debug.Log("Время вышло!");
+        Debug.Log("Время вышло");
     }
 
-    private void GiveAnswer(bool isRight)
+    private void GetAnswer(bool isRight)
     {
-
-        OnGiveAnswer?.Invoke();
+        _counter.SetAnswer(isRight);
+        _shuffler.Shuffle();
     }
 
-    private void EndGame()
+    private void FinishGame()
     {
-        Debug.Log("Карточки закончились");
+        Debug.Log("Вопросы закончились");
     }
 }

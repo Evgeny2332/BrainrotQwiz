@@ -1,7 +1,8 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 public class Timer : MonoBehaviour
 {
@@ -11,28 +12,42 @@ public class Timer : MonoBehaviour
     [SerializeField] private int _minutes;
     [SerializeField] private int _seconds;
 
+    private CancellationTokenSource _token;
+    private bool _isRunning;
+
     public event Action OnTimeUp;
     #endregion
 
     #region MonoBehaviour
-
+    private void Awake()
+    {
+        UpdateTimeDisplay();
+    }
     #endregion
 
-    public void Init(int seconds, int minutes = 0)
+    public void StartTimer()
     {
-        _seconds = seconds;
-        _minutes = minutes;
+        if(_isRunning) return;
 
-        UpdateTimeDisplay();
-        StartCoroutine(StartTimer());
+        _isRunning = true;
+        _token = new CancellationTokenSource();
+        RunTimerAsync().Forget();
+    }
+    public void StopTimer()
+    {
+        _token.Cancel();
+        _token.Dispose();
+        _token = null;
+
+        _isRunning = false;
     }
 
     #region Private Methods
-    private IEnumerator StartTimer()
+    private async UniTask RunTimerAsync()
     {
         while (_seconds > 0 || _minutes > 0)
         {
-            yield return new WaitForSeconds(1);
+            await UniTask.Delay(1000, cancellationToken: _token.Token);
             CalculateTime();
             UpdateTimeDisplay();
         }
@@ -46,13 +61,17 @@ public class Timer : MonoBehaviour
     }
     private void CalculateTime()
     {
-        _seconds--;
-
-        if (_seconds < 0 && _minutes >= 0)
+        if (_seconds == 0)
         {
-            _minutes--;
-            _seconds = 59;
-        }           
+            if (_minutes > 0)
+            {
+                _minutes--;
+                _seconds = 59;
+            }
+        }
+        else
+            _seconds--;
     }
+
     #endregion
 }

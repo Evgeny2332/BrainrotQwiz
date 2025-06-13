@@ -449,6 +449,7 @@ GameObject:
   - component: {fileID: 350731796}
   - component: {fileID: 350731798}
   - component: {fileID: 350731797}
+  - component: {fileID: 350731799}
   m_Layer: 5
   m_Name: TaskCount
   m_TagString: Untagged
@@ -517,6 +518,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350731795}
   m_CullTransparentMesh: 1
+--- !u!114 &350731799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350731795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b332c174117977346b3173ebe81f2536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _answerCounterText: {fileID: 350731797}
+  _answerCount: 0
+  _maxAnswerCount: 15
+  _rightAnswerCount: 0
 --- !u!1 &365134197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1318,9 +1335,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db9bf9c441415849926d354b1bc1353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timer: {fileID: 2141468573}
-  _answerChecker: {fileID: 1078442391}
   _soundBlock: {fileID: 1893661849}
+  _timer: {fileID: 2141468573}
+  _checker: {fileID: 1078442391}
+  _counter: {fileID: 350731799}
+  _shuffler: {fileID: 941303596}
 --- !u!4 &977916953
 Transform:
   m_ObjectHideFlags: 0
@@ -2448,7 +2467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timerText: {fileID: 2141468571}
   _minutes: 0
-  _seconds: 0
+  _seconds: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
