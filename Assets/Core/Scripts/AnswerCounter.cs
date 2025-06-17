@@ -15,6 +15,11 @@ public class AnswerCounter : MonoBehaviour
     public event Action OnTaskOver;
     #endregion
 
+    private void Start()
+    {
+        UpdateAnswerCounter();
+    }
+
     public void SetAnswer(bool isRight)
     {
         if (isRight) _rightAnswerCount++;
@@ -26,6 +31,9 @@ public class AnswerCounter : MonoBehaviour
 
         UpdateAnswerCounter();
     }
+
+    public int GetAnswerCount() => _answerCount - 1;
+    public int GetRightAnswerCount() => _rightAnswerCount;
 
     private void UpdateAnswerCounter() => _answerCounterText.text = $"{_answerCount}/{_maxAnswerCount}";
 }
