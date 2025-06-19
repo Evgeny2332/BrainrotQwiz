@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,28 +11,33 @@ public class AnswerCounter : MonoBehaviour
 
     [SerializeField] private int _rightAnswerCount;
 
-    public event Action OnTaskOver;
+    private int _maxStrikeRightAnswers;
+    private int _strikeRightAnswers;
     #endregion
 
-    private void Start()
-    {
-        UpdateAnswerCounter();
-    }
+    private void Start() => UpdateAnswerCounter();
 
     public void SetAnswer(bool isRight)
     {
-        if (isRight) _rightAnswerCount++;
+        if (isRight)
+        {
+            _rightAnswerCount++;
 
-        if(_answerCount < _maxAnswerCount)
-            _answerCount++;
+            _strikeRightAnswers += 1;
+            if (_maxStrikeRightAnswers < _strikeRightAnswers)
+                _maxStrikeRightAnswers = _strikeRightAnswers;
+        }
         else
-            OnTaskOver?.Invoke();
+        {
+            _strikeRightAnswers = 0;
+        }
 
-        UpdateAnswerCounter();
+        _answerCount++;
     }
 
     public int GetAnswerCount() => _answerCount - 1;
     public int GetRightAnswerCount() => _rightAnswerCount;
-
-    private void UpdateAnswerCounter() => _answerCounterText.text = $"{_answerCount}/{_maxAnswerCount}";
+    public int GetStrikeRightAnswers() => _maxStrikeRightAnswers;
+    public bool IsEndTasks() => _answerCount > _maxAnswerCount;
+    public void UpdateAnswerCounter() => _answerCounterText.text = $"{_answerCount}/{_maxAnswerCount}";
 }

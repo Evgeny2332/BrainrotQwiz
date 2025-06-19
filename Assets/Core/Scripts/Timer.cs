@@ -12,6 +12,9 @@ public class Timer : MonoBehaviour
     [SerializeField] private int _minutes;
     [SerializeField] private int _seconds;
 
+    private int _initialMinutes;
+    private int _initialSeconds;
+
     private CancellationTokenSource _token;
     private bool _isRunning;
 
@@ -22,6 +25,9 @@ public class Timer : MonoBehaviour
     private void Awake()
     {
         UpdateTimeDisplay();
+
+        _initialMinutes = _minutes;
+        _initialSeconds = _seconds;
     }
     #endregion
 
@@ -41,6 +47,18 @@ public class Timer : MonoBehaviour
 
         _isRunning = false;
     }
+    public string GetTimeSpent()
+    {
+        int totalStartSeconds = _initialMinutes * 60 + _initialSeconds;
+        int totalCurrentSeconds = _minutes * 60 + _seconds;
+        int timeSpent = totalStartSeconds - totalCurrentSeconds;
+
+        int minutes = timeSpent / 60;
+        int seconds = timeSpent % 60;
+
+        return $"{minutes:D2}:{seconds:D2}";
+    }
+
 
     #region Private Methods
     private async UniTask RunTimerAsync()
@@ -72,6 +90,5 @@ public class Timer : MonoBehaviour
         else
             _seconds--;
     }
-
     #endregion
 }

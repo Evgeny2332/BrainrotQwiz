@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class GuessBySoundController : MonoBehaviour
@@ -18,52 +17,54 @@ public class GuessBySoundController : MonoBehaviour
     #region MonoBehaviour
     private void OnEnable()
     {
-        _timer.OnTimeUp += TimeUp;
+        _timer.OnTimeUp += ResultGame;
+
         _checker.OnButtonPressed += GetAnswer;
-        _counter.OnTaskOver += FinishGame;
+        _checker.OnHideAnswerIcon += NextConfig;
     }
     private void OnDisable()
     {
-        _timer.OnTimeUp -= TimeUp;
+        _timer.OnTimeUp -= ResultGame;
+
         _checker.OnButtonPressed -= GetAnswer;
-        _counter.OnTaskOver -= FinishGame;
+        _checker.OnHideAnswerIcon -= NextConfig;
     }
 
     private void Start()
     {
         _timer.StartTimer();
         _switcher.SwitchConfig(_counter.GetAnswerCount(), _soundBlock);
+
         _soundBlock.PlaySound();
     }
     #endregion
 
-    private void TimeUp()
-    {
-        ResultGame();
-    }
-
+    #region Private Methods
     private void GetAnswer(bool isRight)
     {
         _counter.SetAnswer(isRight);
         _soundBlock.StopSound();
-        _shuffler.Shuffle();
     }
     private void NextConfig()
     {
+        if (_counter.IsEndTasks())
+        {
+            ResultGame();
+            return;
+        }
+
+        _shuffler.Shuffle();
         _switcher.SwitchConfig(_counter.GetAnswerCount(), _soundBlock);
         _soundBlock.PlaySound();
-    }
-
-    private void FinishGame()
-    {
-        ResultGame();
+        _counter.UpdateAnswerCounter();
     }
 
     private void ResultGame()
     {
-        _resultGame.Enable();
-
         _timer.StopTimer();
         _soundBlock.StopSound();
+
+        _resultGame.Enable(_counter.GetRightAnswerCount(), _timer.GetTimeSpent(), _counter.GetStrikeRightAnswers());
     }
+    #endregion
 }
