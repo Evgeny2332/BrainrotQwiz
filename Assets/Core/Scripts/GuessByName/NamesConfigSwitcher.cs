@@ -2,18 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundConfigSwitcher : MonoBehaviour
+public class NamesConfigSwitcher : MonoBehaviour
 {
     #region Fields
     [Header("Clips and Icons")]
-    [SerializeField] private ConfigGuessBySound _config;
+    [SerializeField] private ConfigGuessByName _config;
     [SerializeField] private int _maxConfigLength;
 
-    [Header("ButtonImages")]
+    [Header("UI")]
+    [SerializeField] private Text _name;
     [SerializeField] private Image _trueIcon;
     [SerializeField] private Image[] _falseIcons;
 
-    private List<AudioClip> _clips;
+    private List<string> _names;
     private List<Sprite> _icons;
     #endregion
 
@@ -25,25 +26,25 @@ public class SoundConfigSwitcher : MonoBehaviour
     }
     #endregion
 
-    public void SwitchConfig(int idConfig, SoundBlock soundBlock)
+    public void SwitchConfig(int idConfig)
     {
         _trueIcon.sprite = _icons[idConfig];
-        soundBlock.ChangeAudioClip(_clips[idConfig]);
+        _name.text = _names[idConfig];
         SetRandomFalseIcons();
     }
 
     #region Private Methods
     private void LoadConfig()
     {
-        _clips = new List<AudioClip>(_config.Clips);
+        _names = new List<string>(_config.Names);
         _icons = new List<Sprite>(_config.Icons);
     }
     private void GenerateConfig()
     {
-        for (int i = _clips.Count; i > _maxConfigLength; i--)
+        for (int i = _names.Count; i > _maxConfigLength; i--)
         {
-            int id = Random.Range(0, _clips.Count);
-            _clips.RemoveAt(id);
+            int id = Random.Range(0, _names.Count);
+            _names.RemoveAt(id);
             _icons.RemoveAt(id);
         }
     }

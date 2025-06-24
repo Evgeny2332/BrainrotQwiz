@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
@@ -25,7 +24,7 @@ public class SoundBlock : MonoBehaviour
 
     public void PlaySound()
     {
-        if (_isPlaying) return;
+        if (_isPlaying || _soundPlayer.clip == null) return;
 
         _isPlaying = true;
         _token = new CancellationTokenSource();
@@ -33,14 +32,11 @@ public class SoundBlock : MonoBehaviour
     }
     public void StopSound()
     {
+        if(!_isPlaying) return;
+
         _soundPlayer.Stop();
 
-        if (_token != null)
-        {
-            _token.Cancel();
-            _token.Dispose();
-            _token = null;
-        }
+        CleanupToken();
         _isPlaying = false;
 
         OnSoundStopped?.Invoke();
@@ -54,6 +50,12 @@ public class SoundBlock : MonoBehaviour
         OnSoundStarted?.Invoke();
         await UniTask.Delay(_soundDuration * 1000, cancellationToken: _token.Token);
         StopSound();
+    }
+    private void CleanupToken()
+    {
+        _token?.Cancel();
+        _token?.Dispose();
+        _token = null;
     }
     #endregion
 }

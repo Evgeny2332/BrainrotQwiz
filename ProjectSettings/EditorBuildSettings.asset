@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Core/Scenes/GuessBySound.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Core/Scenes/GuessByImage.unity
+    guid: f4965a588389e2b478924fc09698c9aa
+  - enabled: 1
+    path: Assets/Core/Scenes/GuessByName.unity
+    guid: c05818fd510f6fb49a2ed13a711f933f
   m_configObjects: {}

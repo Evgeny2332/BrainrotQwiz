@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d004f2b0c32bc943ba100d06b15f569, type: 3}
+  m_Name: GuessNamesConfig
+  m_EditorClassIdentifier: 
+  _names:
+  - Balerina Capuchina
+  - Bobrini Cococosini
+  - Bobrito Bandito
+  - Bombandini Gusini
+  - Bombardino Crocodilo
+  - Boneka Ambalabu
+  - Bri bri bicus de dicus
+  - Brr Brr Patapim
+  - Cappuccino Assassino
+  - Chimpanzini Bananini
+  - Cocofanto Elefanto
+  - Frigo Camelo
+  - Frulli Frulla
+  - Girafa Celeste
+  - Glorbo Frutodrilo
+  - la vaca saturn
+  - Lirili Larila
+  - Orangutini Ananasin
+  - Spioniro Golubino
+  - Ta Ta Ta Sahur
+  - Tralalero Tralala
+  - Trippi Troppi
+  - Trulimero Trulichina
+  - Tung tung Sahur
+  - Udin Din Din Dun
+  _icons:
+  - {fileID: 21300000, guid: edd101d618e6a6a4a89c7f458af294b7, type: 3}
+  - {fileID: 21300000, guid: bc14dcb4916f1004ebffad6f01245c39, type: 3}
+  - {fileID: 21300000, guid: 306f791a767bb2c47875029d0c2e6d99, type: 3}
+  - {fileID: 21300000, guid: a29bf884bab5b6642acc9bd791b4786a, type: 3}
+  - {fileID: 21300000, guid: 7e2b47f607182424b9dc16c793b564d7, type: 3}
+  - {fileID: 21300000, guid: be423f7c3fcb6d54a9352476d82f16c1, type: 3}
+  - {fileID: 21300000, guid: 78be202195728824fba6bd6df1aa5553, type: 3}
+  - {fileID: 21300000, guid: 80fd25ad326e75940b89452cae914d67, type: 3}
+  - {fileID: 21300000, guid: 9b1a4123dd316bd42b698fb4cae2a47d, type: 3}
+  - {fileID: 21300000, guid: 645d995625d152546a11db7935d1dc1c, type: 3}
+  - {fileID: 21300000, guid: de16741f8dfd41744ba8993be9ef5681, type: 3}
+  - {fileID: 21300000, guid: 9f8a5bfc22851414489fc9a9102c207d, type: 3}
+  - {fileID: 21300000, guid: d2b22191265dc3e41bb68eef2cc6ec22, type: 3}
+  - {fileID: 21300000, guid: 999230c62fc7bfb4885e51a6894fa1c1, type: 3}
+  - {fileID: 21300000, guid: 4ad798ef6cc44334184e29dd2dbfc8e8, type: 3}
+  - {fileID: 21300000, guid: f04bd63549f61254ea7dbad2c7ab3249, type: 3}
+  - {fileID: 21300000, guid: 9fa6d7611504bee4fb2a9f9027500105, type: 3}
+  - {fileID: 21300000, guid: 9aa93fac5bee609488e07860c135c2a8, type: 3}
+  - {fileID: 21300000, guid: d89aaa4e02a22f04995255f5146d1662, type: 3}
+  - {fileID: 21300000, guid: 25e5f5c5340a02842b74593a175ee0d8, type: 3}
+  - {fileID: 21300000, guid: e5392625cd852f1428c1c0cc1f63c503, type: 3}
+  - {fileID: 21300000, guid: 390fe65666b30fe4485a56dbf5e48d5e, type: 3}
+  - {fileID: 21300000, guid: 9ec72ee775f82014f8652302908aea5a, type: 3}
+  - {fileID: 21300000, guid: 68989dd13bf4f7544b5acdc5d061a9ff, type: 3}
+  - {fileID: 21300000, guid: 1fd1fdc7faa1451419c19c5fa06d05d7, type: 3}

@@ -7,6 +7,6 @@ public class ConfigGuessBySound : ScriptableObject
     [SerializeField] private List<AudioClip> _clips;
     [SerializeField] private List<Sprite> _icons;
 
-    public List<AudioClip> Clips => _clips;
-    public List<Sprite> Icon => _icons;
+    public IReadOnlyList<AudioClip> Clips => _clips.AsReadOnly();
+    public IReadOnlyList<Sprite> Icons => _icons.AsReadOnly();
 }

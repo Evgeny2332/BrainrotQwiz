@@ -15,7 +15,16 @@ public class AnswerCounter : MonoBehaviour
     private int _strikeRightAnswers;
     #endregion
 
+    #region Properties
+    public int AnswerCount => _answerCount - 1;
+    public int RightAnswerCount => _rightAnswerCount;
+    public int MaxStrikeRightAnswers => _maxStrikeRightAnswers;
+    public bool IsAllTasksCompleted => _answerCount > _maxAnswerCount;
+    #endregion
+
+    #region MonoBehaviour
     private void Start() => UpdateAnswerCounter();
+    #endregion
 
     public void SetAnswer(bool isRight)
     {
@@ -23,21 +32,14 @@ public class AnswerCounter : MonoBehaviour
         {
             _rightAnswerCount++;
 
-            _strikeRightAnswers += 1;
-            if (_maxStrikeRightAnswers < _strikeRightAnswers)
-                _maxStrikeRightAnswers = _strikeRightAnswers;
+            _strikeRightAnswers++;
+            _maxStrikeRightAnswers = Mathf.Max(_maxStrikeRightAnswers, _strikeRightAnswers);
         }
         else
-        {
             _strikeRightAnswers = 0;
-        }
 
         _answerCount++;
     }
 
-    public int GetAnswerCount() => _answerCount - 1;
-    public int GetRightAnswerCount() => _rightAnswerCount;
-    public int GetStrikeRightAnswers() => _maxStrikeRightAnswers;
-    public bool IsEndTasks() => _answerCount > _maxAnswerCount;
     public void UpdateAnswerCounter() => _answerCounterText.text = $"{_answerCount}/{_maxAnswerCount}";
 }

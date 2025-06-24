@@ -1,11 +1,10 @@
 using UnityEngine;
 
-public class GuessBySoundController : MonoBehaviour
+public class GuessByImageController : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private SoundBlock _soundBlock;
     [SerializeField] private Timer _timer;
-    [SerializeField] private SoundConfigSwitcher _switcher;
+    [SerializeField] private ImageConfigSwitcher _switcher;
     [SerializeField] private ButtonShuffler _shuffler;
 
     [SerializeField] private AnswerChecker _checker;
@@ -33,18 +32,12 @@ public class GuessBySoundController : MonoBehaviour
     private void Start()
     {
         _timer.StartTimer();
-        _switcher.SwitchConfig(_counter.AnswerCount, _soundBlock);
-
-        _soundBlock.PlaySound();
+        _switcher.SwitchConfig(_counter.AnswerCount);
     }
     #endregion
 
     #region Private Methods
-    private void GetAnswer(bool isRight)
-    {
-        _counter.SetAnswer(isRight);
-        _soundBlock.StopSound();
-    }
+    private void GetAnswer(bool isRight) => _counter.SetAnswer(isRight);
     private void NextConfig()
     {
         if (_counter.IsAllTasksCompleted)
@@ -59,15 +52,13 @@ public class GuessBySoundController : MonoBehaviour
     private void ProceedToNext()
     {
         _shuffler.Shuffle();
-        _switcher.SwitchConfig(_counter.AnswerCount, _soundBlock);
-        _soundBlock.PlaySound();
+        _switcher.SwitchConfig(_counter.AnswerCount);
         _counter.UpdateAnswerCounter();
     }
 
     private void ShowResults()
     {
         _timer.StopTimer();
-        _soundBlock.StopSound();
 
         _resultGame.ShowResults(_counter.RightAnswerCount, _timer.GetTimeSpent(), _counter.MaxStrikeRightAnswers);
     }

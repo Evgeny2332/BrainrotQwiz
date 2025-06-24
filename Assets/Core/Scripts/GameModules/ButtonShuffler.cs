@@ -4,8 +4,6 @@ using UnityEngine;
 public class ButtonShuffler : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private GuessBySoundController _guessBySoundController;
-
     [SerializeField] private List<Transform> _buttonsTransform;
     #endregion
 
