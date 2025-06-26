@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class ResultGame : MonoBehaviour
 {
+    #region Fields
     [SerializeField] private Text _maxRightAnswers;
     [SerializeField] private Text _timeSpent;
     [SerializeField] private Text _strikeRightAnswers;
@@ -10,16 +11,14 @@ public class ResultGame : MonoBehaviour
     [SerializeField] private GameObject _resultWindow;
 
     private const int MaxPossibleAnswers = 15;
+    #endregion
 
     public void ShowResults(int maxRightAnswers, string timeSpent, int strikeRightAnswers)
     {
         _resultWindow.SetActive(true);
         UpdateView(maxRightAnswers, timeSpent, strikeRightAnswers);
     }
-    public void Disable()
-    {
-        _resultWindow.SetActive(false);
-    }
+    public void HideResults() => _resultWindow.SetActive(false);
 
     private void UpdateView(int maxRightAnswers, string timeSpent, int strikeRightAnswers)
     {

@@ -1,14 +1,11 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 
 public class Timer : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private Text _timerText;
-
     [SerializeField] private int _minutes;
     [SerializeField] private int _seconds;
 
@@ -16,19 +13,14 @@ public class Timer : MonoBehaviour
     private int _initialSeconds;
 
     private CancellationTokenSource _token;
-    private bool _isRunning;
+    private bool _isRunning = false;
 
     public event Action OnTimeUp;
+    public event Action<int, int> OnTimeChanged;
     #endregion
 
     #region MonoBehaviour
-    private void Awake()
-    {
-        UpdateTimeDisplay();
-
-        _initialMinutes = _minutes;
-        _initialSeconds = _seconds;
-    }
+    private void Start() => InitTime();
     #endregion
 
     public void StartTimer()
@@ -36,17 +28,21 @@ public class Timer : MonoBehaviour
         if(_isRunning) return;
 
         _isRunning = true;
+
         _token = new CancellationTokenSource();
+
         RunTimerAsync().Forget();
     }
     public void StopTimer()
     {
-        _token.Cancel();
-        _token.Dispose();
-        _token = null;
+        if(!_isRunning) return;
+
+        if(_token != null)
+            ClearToken();
 
         _isRunning = false;
     }
+
     public string GetTimeSpent()
     {
         int totalStartSeconds = _initialMinutes * 60 + _initialSeconds;
@@ -61,34 +57,42 @@ public class Timer : MonoBehaviour
 
 
     #region Private Methods
+    private void InitTime()
+    {
+        _initialMinutes = _minutes;
+        _initialSeconds = _seconds;
+
+        OnTimeChanged?.Invoke(_minutes, _seconds);
+    }
+
     private async UniTask RunTimerAsync()
     {
         while (_seconds > 0 || _minutes > 0)
         {
             await UniTask.Delay(1000, cancellationToken: _token.Token);
             CalculateTime();
-            UpdateTimeDisplay();
+            OnTimeChanged?.Invoke(_minutes, _seconds);
         }
 
         OnTimeUp?.Invoke();
     }
 
-    private void UpdateTimeDisplay()
-    {
-        _timerText.text = $"{_minutes:D2}:{_seconds:D2}";
-    }
     private void CalculateTime()
     {
-        if (_seconds == 0)
-        {
-            if (_minutes > 0)
-            {
-                _minutes--;
-                _seconds = 59;
-            }
-        }
-        else
+        if (_seconds > 0)
             _seconds--;
+        else if (_minutes > 0)
+        {
+            _minutes--;
+            _seconds = 59;
+        }
+    }
+
+    private void ClearToken()
+    {
+        _token.Cancel();
+        _token.Dispose();
+        _token = null;
     }
     #endregion
 }

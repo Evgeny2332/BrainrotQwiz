@@ -5,11 +5,12 @@ public class GuessBySoundController : MonoBehaviour
     #region Fields
     [SerializeField] private SoundBlock _soundBlock;
     [SerializeField] private Timer _timer;
-    [SerializeField] private SoundConfigSwitcher _switcher;
-    [SerializeField] private ButtonShuffler _shuffler;
 
-    [SerializeField] private AnswerChecker _checker;
-    [SerializeField] private AnswerCounter _counter;
+    [SerializeField] private AnswerController _answerController;
+    [SerializeField] private AnswerCounter _answerCounter;
+
+    [SerializeField] private SoundConfigSwitcher _configSwitcher;
+    [SerializeField] private ButtonShuffler _buttonShuffler;
 
     [SerializeField] private ResultGame _resultGame;
     #endregion
@@ -17,59 +18,55 @@ public class GuessBySoundController : MonoBehaviour
     #region MonoBehaviour
     private void OnEnable()
     {
-        _timer.OnTimeUp += ShowResults;
+        _timer.OnTimeUp += ShowResult;
 
-        _checker.OnButtonPressed += GetAnswer;
-        _checker.OnHideAnswerIcon += NextConfig;
+        _answerController.OnAnswerSubmitted += SubmitAnswer;
+        _answerController.OnAnswerCompleted += NextConfig;
     }
     private void OnDisable()
     {
-        _timer.OnTimeUp -= ShowResults;
+        _timer.OnTimeUp -= ShowResult;
 
-        _checker.OnButtonPressed -= GetAnswer;
-        _checker.OnHideAnswerIcon -= NextConfig;
+        _answerController.OnAnswerSubmitted -= SubmitAnswer;
+        _answerController.OnAnswerCompleted -= NextConfig;
     }
 
     private void Start()
     {
-        _timer.StartTimer();
-        _switcher.SwitchConfig(_counter.AnswerCount, _soundBlock);
+        _configSwitcher.SwitchConfig(_answerCounter.GetCurrentConfigIndex(), _soundBlock);
 
+        _timer.StartTimer();
         _soundBlock.PlaySound();
     }
     #endregion
 
     #region Private Methods
-    private void GetAnswer(bool isRight)
+    private void ShowResult()
     {
-        _counter.SetAnswer(isRight);
+        _resultGame.ShowResults(_answerCounter.RightAnswerCount, _timer.GetTimeSpent(), _answerCounter.MaxStrikeRightAnswers);
         _soundBlock.StopSound();
     }
+
+    private void SubmitAnswer(bool isRight)
+    {
+        _answerCounter.SetAnswer(isRight);
+
+        _soundBlock.StopSound();
+    }
+
     private void NextConfig()
     {
-        if (_counter.IsAllTasksCompleted)
+        if (!_answerCounter.IsAllTasksCompleted)
         {
-            ShowResults();
-            return;
+            _answerCounter.UpdateAnswerCounter();
+
+            _configSwitcher.SwitchConfig(_answerCounter.GetCurrentConfigIndex(), _soundBlock);
+            _buttonShuffler.Shuffle();
+
+            _soundBlock.PlaySound();
         }
-
-        ProceedToNext();
-    }
-
-    private void ProceedToNext()
-    {
-        _shuffler.Shuffle();
-        _switcher.SwitchConfig(_counter.AnswerCount, _soundBlock);
-        _soundBlock.PlaySound();
-        _counter.UpdateAnswerCounter();
-    }
-
-    private void ShowResults()
-    {
-        _timer.StopTimer();
-        _soundBlock.StopSound();
-
-        _resultGame.ShowResults(_counter.RightAnswerCount, _timer.GetTimeSpent(), _counter.MaxStrikeRightAnswers);
+        else
+            ShowResult();
     }
     #endregion
 }

@@ -7,7 +7,7 @@ public class SoundConfigSwitcher : MonoBehaviour
     #region Fields
     [Header("Clips and Icons")]
     [SerializeField] private ConfigGuessBySound _config;
-    [SerializeField] private int _maxConfigLength;
+    [SerializeField] private int _maxConfigCount;
 
     [Header("ButtonImages")]
     [SerializeField] private Image _trueIcon;
@@ -40,7 +40,7 @@ public class SoundConfigSwitcher : MonoBehaviour
     }
     private void GenerateConfig()
     {
-        for (int i = _clips.Count; i > _maxConfigLength; i--)
+        for (int i = _clips.Count; i > _maxConfigCount; i--)
         {
             int id = Random.Range(0, _clips.Count);
             _clips.RemoveAt(id);

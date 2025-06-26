@@ -16,7 +16,7 @@ public class AnswerCounter : MonoBehaviour
     #endregion
 
     #region Properties
-    public int AnswerCount => _answerCount - 1;
+    public int AnswerCount => _answerCount;
     public int RightAnswerCount => _rightAnswerCount;
     public int MaxStrikeRightAnswers => _maxStrikeRightAnswers;
     public bool IsAllTasksCompleted => _answerCount > _maxAnswerCount;
@@ -42,4 +42,5 @@ public class AnswerCounter : MonoBehaviour
     }
 
     public void UpdateAnswerCounter() => _answerCounterText.text = $"{_answerCount}/{_maxAnswerCount}";
+    public int GetCurrentConfigIndex() => _answerCount - 1;
 }

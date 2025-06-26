@@ -314,6 +314,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123845872}
   m_CullTransparentMesh: 1
+--- !u!1 &224161322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224161326}
+  - component: {fileID: 224161325}
+  - component: {fileID: 224161324}
+  - component: {fileID: 224161323}
+  m_Layer: 0
+  m_Name: AnswerController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &224161323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224161322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ecc78bf29edd9d45a4f10f160287448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delayHideAnswerIcon: 1
+  _barrier: {fileID: 1792746955}
+--- !u!114 &224161324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224161322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11a18b9f51c464d4c8fd8ac2b383dd1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &224161325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224161322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302e9d454bb14a9479d032f4005a5357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _checker: {fileID: 224161324}
+  _iconHandler: {fileID: 224161323}
+--- !u!4 &224161326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224161322}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 570.9202, y: 777.58594, z: -7.766527}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &341788110
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +469,7 @@ GameObject:
   - component: {fileID: 350731797}
   - component: {fileID: 350731799}
   m_Layer: 5
-  m_Name: TaskCount
+  m_Name: AnswerCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -674,7 +748,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1078442391}
+      - m_Target: {fileID: 224161324}
         m_TargetAssemblyTypeName: AnswerChecker, Assembly-CSharp
         m_MethodName: SubmitAnswer
         m_Mode: 6
@@ -686,8 +760,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1078442391}
-        m_TargetAssemblyTypeName: AnswerChecker, Assembly-CSharp
+      - m_Target: {fileID: 224161323}
+        m_TargetAssemblyTypeName: AnswerIconHandler, Assembly-CSharp
         m_MethodName: ActivateAnswerIcon
         m_Mode: 2
         m_Arguments:
@@ -1136,7 +1210,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1078442391}
+      - m_Target: {fileID: 224161324}
         m_TargetAssemblyTypeName: AnswerChecker, Assembly-CSharp
         m_MethodName: SubmitAnswer
         m_Mode: 6
@@ -1148,8 +1222,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1078442391}
-        m_TargetAssemblyTypeName: AnswerChecker, Assembly-CSharp
+      - m_Target: {fileID: 224161323}
+        m_TargetAssemblyTypeName: AnswerIconHandler, Assembly-CSharp
         m_MethodName: ActivateAnswerIcon
         m_Mode: 2
         m_Arguments:
@@ -1591,10 +1665,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _soundBlock: {fileID: 1893661849}
   _timer: {fileID: 2141468573}
-  _switcher: {fileID: 1078442392}
-  _shuffler: {fileID: 941303596}
-  _checker: {fileID: 1078442391}
-  _counter: {fileID: 350731799}
+  _answerController: {fileID: 224161325}
+  _answerCounter: {fileID: 350731799}
+  _configSwitcher: {fileID: 1078442392}
+  _buttonShuffler: {fileID: 941303596}
   _resultGame: {fileID: 2129468862}
 --- !u!4 &977916953
 Transform:
@@ -1762,7 +1836,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1078442391}
+      - m_Target: {fileID: 224161324}
         m_TargetAssemblyTypeName: AnswerChecker, Assembly-CSharp
         m_MethodName: SubmitAnswer
         m_Mode: 6
@@ -1774,8 +1848,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1078442391}
-        m_TargetAssemblyTypeName: AnswerChecker, Assembly-CSharp
+      - m_Target: {fileID: 224161323}
+        m_TargetAssemblyTypeName: AnswerIconHandler, Assembly-CSharp
         m_MethodName: ActivateAnswerIcon
         m_Mode: 2
         m_Arguments:
@@ -1978,7 +2052,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1078442390}
-  - component: {fileID: 1078442391}
   - component: {fileID: 1078442392}
   m_Layer: 5
   m_Name: ButtonsAnswer
@@ -2011,20 +2084,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -273}
   m_SizeDelta: {x: 900, y: 875}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1078442391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078442389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a18b9f51c464d4c8fd8ac2b383dd1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _delayHideAnswerIcon: 1
-  _barrier: {fileID: 1792746955}
 --- !u!114 &1078442392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2038,7 +2097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 0993ef7f8c6556846964be6ef98bf678, type: 2}
-  _maxConfigLength: 15
+  _maxConfigCount: 15
   _trueIcon: {fileID: 1248384136}
   _falseIcons:
   - {fileID: 1005571178}
@@ -2320,7 +2379,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1078442391}
+      - m_Target: {fileID: 224161324}
         m_TargetAssemblyTypeName: AnswerChecker, Assembly-CSharp
         m_MethodName: SubmitAnswer
         m_Mode: 6
@@ -2332,8 +2391,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1078442391}
-        m_TargetAssemblyTypeName: AnswerChecker, Assembly-CSharp
+      - m_Target: {fileID: 224161323}
+        m_TargetAssemblyTypeName: AnswerIconHandler, Assembly-CSharp
         m_MethodName: ActivateAnswerIcon
         m_Mode: 2
         m_Arguments:
@@ -3285,6 +3344,7 @@ GameObject:
   - component: {fileID: 2141468572}
   - component: {fileID: 2141468571}
   - component: {fileID: 2141468573}
+  - component: {fileID: 2141468574}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -3365,9 +3425,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94db21f81766b94c8d07863e0809341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timerText: {fileID: 2141468571}
   _minutes: 2
   _seconds: 0
+--- !u!114 &2141468574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141468569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f8f56bdce913b4389eae280d75c325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timer: {fileID: 2141468573}
+  _timerText: {fileID: 2141468571}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3379,3 +3452,4 @@ SceneRoots:
   - {fileID: 981814263}
   - {fileID: 977916953}
   - {fileID: 941303597}
+  - {fileID: 224161326}

@@ -2,20 +2,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NamesConfigSwitcher : MonoBehaviour
+public class NameConfigSwitcher : MonoBehaviour
 {
     #region Fields
-    [Header("Clips and Icons")]
+
+    [Header("Config")]
     [SerializeField] private ConfigGuessByName _config;
-    [SerializeField] private int _maxConfigLength;
+    [SerializeField] private int _maxConfigLength = 15;
 
     [Header("UI")]
-    [SerializeField] private Text _name;
+    [SerializeField] private Text _nameText;
     [SerializeField] private Image _trueIcon;
     [SerializeField] private Image[] _falseIcons;
 
     private List<string> _names;
     private List<Sprite> _icons;
+
     #endregion
 
     #region MonoBehaviour
@@ -28,46 +30,49 @@ public class NamesConfigSwitcher : MonoBehaviour
 
     public void SwitchConfig(int idConfig)
     {
+        if (idConfig >= _names.Count || idConfig >= _icons.Count) return;
+
+        _nameText.text = _names[idConfig];
+
         _trueIcon.sprite = _icons[idConfig];
-        _name.text = _names[idConfig];
-        SetRandomFalseIcons();
+        SetRandomFalseIcons(_icons[idConfig]);
     }
 
     #region Private Methods
+
     private void LoadConfig()
     {
         _names = new List<string>(_config.Names);
         _icons = new List<Sprite>(_config.Icons);
     }
+
     private void GenerateConfig()
     {
-        for (int i = _names.Count; i > _maxConfigLength; i--)
+        while (_names.Count > _maxConfigLength)
         {
-            int id = Random.Range(0, _names.Count);
-            _names.RemoveAt(id);
-            _icons.RemoveAt(id);
+            int index = Random.Range(0, _names.Count);
+            _names.RemoveAt(index);
+            _icons.RemoveAt(index);
         }
     }
 
-    private void SetRandomFalseIcons()
+    private void SetRandomFalseIcons(Sprite correctSprite)
     {
-        HashSet<string> usedNames = new HashSet<string>();
-        string correctName = _trueIcon.sprite.name;
-        usedNames.Add(correctName);
-
+        HashSet<string> used = new HashSet<string> { correctSprite.name };
         int count = 0;
 
         while (count < _falseIcons.Length)
         {
-            Sprite candidate = _config.Icons[Random.Range(0, _config.Icons.Count)];
+            Sprite candidate = _icons[Random.Range(0, _icons.Count)];
 
-            if (!usedNames.Contains(candidate.name))
+            if (!used.Contains(candidate.name))
             {
                 _falseIcons[count].sprite = candidate;
-                usedNames.Add(candidate.name);
+                used.Add(candidate.name);
                 count++;
             }
         }
     }
+
     #endregion
 }
