@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 640ff713cb1f76a4fa5e856dd77a3cbe
+guid: c46aa9a35c843244a81bfcab152d987c
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Lapsus Pro
+  - Montserrat
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

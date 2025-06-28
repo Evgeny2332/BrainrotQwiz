@@ -43,6 +43,7 @@ public class GuessBySoundController : MonoBehaviour
     #region Private Methods
     private void ShowResult()
     {
+        _timer.StopTimer();
         _resultGame.ShowResults(_answerCounter.RightAnswerCount, _timer.GetTimeSpent(), _answerCounter.MaxStrikeRightAnswers);
         _soundBlock.StopSound();
     }

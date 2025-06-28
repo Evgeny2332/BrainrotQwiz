@@ -23,7 +23,7 @@ public class ResultGame : MonoBehaviour
     private void UpdateView(int maxRightAnswers, string timeSpent, int strikeRightAnswers)
     {
         _maxRightAnswers.text = $"{maxRightAnswers}/{MaxPossibleAnswers}";
-        _timeSpent.text = "Время: " + timeSpent;
-        _strikeRightAnswers.text = $"Страйк: {strikeRightAnswers}";
+        _timeSpent.text = $"{timeSpent}";
+        _strikeRightAnswers.text = $"x{strikeRightAnswers}";
     }
 }

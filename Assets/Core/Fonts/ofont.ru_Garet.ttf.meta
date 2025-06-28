@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 368b014b5db28a846be2ea41c52afd66
+guid: fcd4d60ef35c2ec4fb419d8d606386ed
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Kaph
+  - Garet
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
